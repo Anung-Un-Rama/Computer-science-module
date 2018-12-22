@@ -1,0 +1,86 @@
+Questions:
+
+1. Why do programmers use pseudocode?
+
+A: It helps to break down every step that the programmer may need to code fully. It helps by providing a space to brainstorm in a way that is more human understandable and readable. It's like the outline before the essay. 
+ 
+2. If you run pseudocode on your computer what would happen?
+
+A: Nothing. It is purely written in a way that makes it more understandable to humans. Computers don't know what to do with it. 
+
+
+
+
+
+
+Programming assignment:
+
+1. Create a function that takes two numbers and prints out the greater number. 
+	
+PC: 	INPUT first number as argument
+	INPUT second number as agrgument
+	  IF first number is greater than second number 
+	    PRINT first number
+	ELSE print second number
+	ENDIF
+
+
+
+2. Create function that prints out the numbers from 1 to 100.
+	
+PC:	CREATE function
+	INITIATE for loop to iterate through numbers
+	SET i = 1
+	SET the count to stop at 100
+	   CONSOLE.LOG numbers
+	
+
+
+3, Crete a function that searches for a specific entry in a phonebook.
+	
+PC:	
+	CREATE function
+	SET argument to an array and a name.
+	SET for loop to iterate over array of names
+	    IF statement to obtain desired name
+		RETURN the desired name
+	    ENDIF
+
+
+4.Using the pseudocode you wrote for the previous questions, implement in any computer language of your choice.
+
+Code (JavaScript):
+
+1. 	function whichIsBigger(a, b){
+  	   if(a > b){
+             return a
+           }
+          else
+          {
+            return b
+          }
+        }
+
+
+
+2.	function num(){
+  	   for (let i = 1; i <= 100; i++){
+    	     console.log(i);
+           }
+        }
+        num();	
+
+
+
+3.	function search(phonebook, name){
+  	  for(let i = 0; i < phonebook.length; i++){
+    	    if( phonebook[i] == name){
+              return name; 
+            }
+          }
+          return false 
+          }
+
+         console.log(search(["John", "William", "Bill"], "John"));
+
+
