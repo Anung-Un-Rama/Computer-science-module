@@ -27,13 +27,13 @@ END FUNCTION
 A: No, I would not. The naming is vague, there are way too many extraneous comments --something that shouldn't be needed if the name was done more clearly. Perhaps this would be more clearly understandable:
 
 
-	FUNCTION convertTemp(temp1, temp2)
-	  IF temp2 = fahrenheit THEN
-	    SET temperature to (temp1-32.00) * (5/9)
+	FUNCTION convertTemp(oppositeTemperature, currentTemperature)
+	  IF currentTemperature = fahrenheit THEN
+	    SET temperature to (oppositeTemperature-32.00) * (5/9)
 	  PRINT temperature 
 	  
-          ELSE IF temp2 = celsius THEN
-	    SET temperature to temp1 * 1.8000 + 32.00
+          ELSE IF currentTemperature = celsius THEN
+	    SET temperature to oppositeTemperature * 1.8000 + 32.00
 	    PRINT temperature
 	  END IF
 	END FUNCTION
@@ -88,7 +88,47 @@ b (refactored).
 
 
 
-c (refactored). I am honestly not seeing anything particularly wrong with this one. It makes sense to me. 
+c (refactored). 
+
+	CLASS accountInfo
+
+	   FUNCTION displayBalance
+    	   PRINT balance
+ 	   END FUNCTION
+	
+	CLASS accountTransactions
+
+ 	   FUNCTION deposit(amount)
+    	     SET balance to balance + amount
+ 	   END FUNCTION
+
+ 	   FUNCTION withdraw(amount)
+             IF balance > amount THEN
+               SET balance to balance - amount
+             END
+           END FUNCTION
+
+	CLASS customerOffers
+	
+	  FUNCTION creditCardOffer
+            IF NOT(customer.hasCreditCard) THEN
+              CALL offerCreditCard
+            END
+          END FUNCTION
+
+	CLASS customerStatus
+	 
+	  FUNCTION checkStatus
+            IF NOT(customer.hasCheckingAccount) THEN
+             CALL offerCheckingAccount
+           END
+         END FUNCTION
+
+	....
+ 	....
+ 	....
+
+	END
 
 	
 
@@ -104,20 +144,21 @@ The square root of 2 is approximately 1.414213562373095.
 
 Code: 
 
-function perfectSquare (numbers){
+function perfectSquare(numbers) {
   let sum = 0;
-  for(let i = 0; i < numbers.length; i++){
-    sum = sum +numbers[i];
+  for (let i = 0; i < numbers.length; i++) {
+    sum = sum + numbers[i];
   }
-    if(Math.sqrt(numbers) % 1 == 0){
-      return numbers
-    }
-    else {
-      return sum;
+  if (Math.sqrt(sum) % 1 == 0) {
+    return Math.sqrt(sum);
+  }
+  else 
+  {
+    return sum;
   }
 }
 
-console.log(perfectSquare([1,2,3,4,5,6,7,8,9]));
+console.log(perfectSquare([1,24,2,3,70]));
 
 
 
