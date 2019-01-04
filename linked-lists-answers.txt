@@ -200,19 +200,14 @@ Code:	function LinkedList(){
 	}
 
 
-	LinkedList.prototype.reverse = function(){
-	  var prevNode = null;
-	  var selectedNode = this.head;
-	  var nextNode;
-
-	  while(selectedNode){
-	    nextNode =  selectedNode.next;
-	    selectedNode  = prevNode;
-	    prevNode = selectedNode;
-	    selectedNode = nextNode;
-	  }
-	  this.head = prevNode;
-	}
-
-
-
+      LinkedList.prototype.reverse = function(){
+        let reversed = [];
+        let nextNode = this.head;
+        while (nextNode !== null){
+          reversed.unshift(nextNode);
+        nextNode = nextNode.next;
+      }
+      let newList = new LinkedList();
+      reversed.forEach(n => newList.push(n));
+      return newList;
+    }
