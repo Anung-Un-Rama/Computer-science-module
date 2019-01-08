@@ -5,95 +5,54 @@
 
 - Making coffee (how I do it);
   
-  PC: 	FILL electric kettle to full line distilled water
+  PC: 	
+	PROGRAM MakeCuppaJoe:
+
+	  FILL kettle THEN
+	    TURN-ON kettle
+	  TARE-SCALE
+	  WEIGH coffee THEN
+	    GRIND
+	  PLACE filter THEN
+	    WET filter THEN
+	      PLACE groundBeans
+	  TARE-SCALE
+	  POUR water UNTIL
+            water.weight == coffee.weight * 16
 	
-	INITIATE the kettle's heating function by pressing down the lever
-	
-	WHILE water is heating, TARE measuring bowl on scale
+	END
 		
-	IN the now-tared measuring cup, POUR whole coffee beans of your choice to desired amount 	in grams
-	
-	MULTIPLY the weight of the coffee beans by 16 to get the weight of water you need to add
-	
-	GRIND beans to a medium coarseness (the size of a rough, grainy sand)
-	
-	PLACE filter in the Chemex top, thickest side on the side of the spout
-	
-	IF water has reached its proper temp, the kettle should have turned itself off
-	
-	IF kettle is off, moisten the empty filter to HEAT the carafe and eliminate paper taste 	that comes from a dry filter
-
-	POUR out water from carafe AND PLACE empty Chemex on the scale
-
-	POUR ground beans AND tare the scale again so that it is at 0 grams
-
-	WITH the weight in grams of water that you need in mind, pour hot water over the beans
-
-	FILL the filter part of the carafe to about half
-
-	LET coffee brew for about a minute
-
-	REPEAT the pouring process in minute intervals, keeping the water level at about half 		way full UNTIL scale displays the proper weight. 
-	
-	REACH proper weight in grams THEN let coffee finish brewing.
-
-	IF there is no more water dripping from the filter into the carafe THEN
-
-	FINISHED
-	
 
 
 - Washing dishes;
 
-  PC:	START by turning on hot water
+  PC:	PROGRAM WashDishes:
 	
-	PLACE dirty dishes in right sink
-
-	THEN grab each dish one by one and REMOVE grime and food particles in left sink
-	
-	PLACE cleaned off dish in dishwasher
-
-	CONTINUE until right sink is empty
-	
-	END the hot water by turning it off
-
-	THEN place dishwasher pod in its receptacle in the dishwasher door
-
-	START dishwasher 
-
-	WHILE dishwasher is running CLEAN counter tops and WIPE up excess water
-
-	THEN when the dishwasher is finished, OPEN AND PULL racks out to air dry
-	
-	WHEN dry, PUT away dishes THEN
-
-	FINISHED
-
+	  INITIATE hotWater
+	  RINSE dirtyDish THEN
+	    PLACE inDishWasher 
+	  REPEAT rinseDish UNTIL
+	    dirtyDish == 0
+	  IF dirtyDish == 0 THEN
+	    RUN dishWasher && TURN-OFF hotWater
+	  END IF
+	 END
+	    
 
 - A choice of your own (eating pizza).
 
-  PC:	START by placing slice of pizza in mouth
-
-	THEN bite down until piece of pizza separates from the larger slice
-
-	INITIATE chewing the piece of pizza you bit off UNTIL it is broken down to desirable 		swallowing size
-
-	THEN swallow chewed piece of pizza
-
-	WHILE pizza slice exists in hand CONTINUE to bite chew and swallow
-
-	WHEN slice is null THEN
-
-	GRAB  another slice, because weirdos only eat one slice
-
-	REPEAT process with second slice
-
-	WHEN whole pizza is finished WEEP
+  PC:	PROGRAM eatZa:
 	
-	THEN
-	
-	FINISHED
+	  FOR EACH bite
+	    wholeSlice = wholeSlice - bite
+	      IF wholeSlice = 0 THEN INITIATE grabNotherSlice
+	  WHILE wholeZa = hasSlices THEN 
+	    grabNotherSlice
+	  IF wholeZa == 0 THEN 
+	    RETURN sadness
 
+	END
+	    
 
 
 2. As with the knot algorithm, there may be more than one way to solve the problem. It is essential to try to pick the best algorithm for a situation. Name three companies who created an algorithm that made them successful, e.g., Google's search algorithm. It doesn't need to be a tech example (such as a recipe or manufacturing a product). Google's algorithm produces more relevant results than other search engines; what about each of your cases make them stand out?
