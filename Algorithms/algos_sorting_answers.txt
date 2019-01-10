@@ -1,20 +1,62 @@
 //////////EXERCISES//////////
 
+
 1. Write pseudocode for bubble sort.
 
-A:
+A: 
+
+	FUNCTION bubbleSort(collection)
+	  REPEAT
+	    SET swapped to false
+	    FOR i = FIRST INDEX of collection to LAST INDEX of collection - 1
+	      IF collection[i] > collection[i + 1] THEN
+	        SET tmp tp collection[i]
+	        SET collection[i] to collection[i + 1]
+		SET collection[i + 1] to tmp
+		SET swapped to true
+	      END IF
+	    END FOR
+	  UNTIL swapped to false
+	END FUNCTION
+
 
 
 2. Write pseudocode for quicksort.
 
 A:
 
+	FUNCTION quickSort(collection)
+	  SET low to 0
+	  SET high to collection - 1
+	    IF low < high THEN
+	      SET pivot to SEPARATE collection, low, high
+	      CALL quickSort WITH collection, low, pivot
+	      CALL quickSort WITH collection, pivot + 1, high
+	    END IF
+	END FUNCTION
+
+	FUNCTION separate(collection)
+	  SET pivot to collection[low]
+	  SET left to low
+	  
+	  FOR EACH item in collection
+	    IF collection[i] < pivot THEN	
+	      SWAP collection[i] WITH collection[left + 1]
+	      SET left to left + 1
+	    END IF	
+	  END FOR
+	  SWAP WITH pivot, collection[left]
+	  RETURN left
+	END FUNCTION
+
 
 3. We talked about time complexity in a previous checkpoint, and how to get an idea of the efficiency of an algorithm. After looking at the pseudocode for the above sorting methods, identify why merge sort and quick sort are much more efficient than the others. Walking through each algorithm with a few sample collections may help.
 
-A:
+A: The reason that merge sort is efficient is because it is able to handle larger collections without having to iterate through the collection over and over again. It does this by dividing the collections into sub-collections, then merges them back together in their proper, sorted order. 
+
+Quicksort is efficient because it uses less memory while sorting through a large collection because it doesn't have to compare each and every item with each and every other item. 
 
 
 4. All of the sorts addressed in this checkpoint are known as comparison sorts. Research bucket sort and explain how it works. What is the ideal input for bucket sort?
 
-A:
+A: From what I have read, bucket sort begins with an unsorted array in which it sets up and array of "empty buckets." Then, depending on what the item's range may be, it dumps that item into the corresponding bucket. When this is all said and done, it goes through the buckets and sorts the items there, then dumps them back in the original array all fresh and shiny and sorted. This works well when the information given is more easily able to be sorted into buckets. Meaning, that the information is more uniform in nature. 
