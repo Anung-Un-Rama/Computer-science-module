@@ -66,21 +66,21 @@ class BST{
     this.root = null;
   }
   
-  search(data){
-    let currentNode = this.root;
-    while(currentNode != data){
-      if(currentNode == null) {
-        return false;
-      }  
-      else if (data < currentNode.data) {
-        currentNode = currentNode.left;
+  isPresent(data){
+    let current = this.root;
+    while(current){
+      if(data == current.data){
+        return true;
+      }
+      if(data < current.data){
+        current = current.left;
       }
       else
       {
-        currentNode = currentNode.right;
+        current = current.right;
       }
     }
-    return true;   
+    return false;
   }
 
 
