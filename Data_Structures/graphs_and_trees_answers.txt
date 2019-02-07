@@ -1,0 +1,291 @@
+////////////Exercises////////////
+
+
+1. What is a binary tree and what makes it unique to other trees?
+
+  A: It's a data structure comprised of nodes that point to other nodes children down the line to their right and left. It's unique
+  because a node can only have two children. 
+
+2. What is a heuristic?
+
+  A: It's a way that an algorithm solves complex problems faster. But, this will sacrifice a lot of accuracy. 
+
+
+3. What is another problem besides the shortest-path problem that requires the use of heuristics?
+
+  A: The Traveling Salesman Problem is a classic. 
+
+
+4. What is the difference between a depth-first search and a breadth-first search?
+
+  A: DFS travels the structure beginning at the root then moving down the branches as far as it can go before doubling back and
+  traveling down another branch. BFS travels starting at the root as well, but it instead searches all the neighboring branches
+  before heading deeper down to the subsequent levels. 
+
+
+5. Explain in your own words what an undirected, a-cyclic, unweighted graph is.
+
+  A: The undirected part means that you can travel between two nodes back and forth, then a-cyclic means that the search will not
+  loop and thus must be BFS. Unweighted means that it won't assign a cost to the travel (like the amount of distance between nodes).
+  So, this means that this graph is a BFS type that can go back and forth between nodes while NOT tracking travel cost. 
+
+
+6. What kind of graph is a binary search tree?
+
+  A: This sounds like it would be directed, a-cyclic, and unweighted.
+
+
+
+///////////Programming Questions/////////
+
+
+1. Given a Binary Search Tree and a value, write a function that checks to see whether the value exists within the tree.
+
+Example: The value 10 exists in the tree. The value 23 does not exist in the tree.
+
+- Explanation: 
+
+  Beginning at the root, I will compare the value there with the root's value. If the value is greater than the root value, it will
+  travel down and to the left to the next child. If this is less than the previous, it will go to the right. This goes so on and so
+  forth until the desired value is found or we run out of nodes to search, returning true if found and false if if isn't. 
+
+
+- Code:
+
+// Need to create a Node class so that we can make new nodes later with the same parameters. 
+
+class Node{
+  // Set a constructor that will serve as the starting state of all nodes created later. 
+  // We set the right and left node to null, because this will be their default value unless assigned otherwise. 
+  constructor(data, left = null, right = null){
+    //Now we set values for the arguments in the constructor
+    this.data = data;
+    this.left = left;
+    this.right = right;
+  }
+  
+
+//Let's start off with a way to create new nodes, or insert nodes. We give it an argument to insert a value. 
+
+  createNode(value) {
+    // We need to check if the value against the data to set where it will be inserted in the tree. 
+    if (value <= this.data) {
+      //then a little recursion to check if the left is null. If it is it's time to set the value to that node. 
+      if (this.left == null) {
+        this.left = new Node(value);
+      }
+      // Otherwise, we set the node to right
+      else {
+        if (this.right == null) {
+          this.right = new Node(value);
+        }
+      }
+    }
+  }
+ 
+ //Alright, we can now make new nodes whenever we want. Muahahaha!
+
+}
+//And that's it for the Node class. 
+
+//Now we make a Binary Search Tree class (BST). 
+class BST{
+  //We set a constructor
+  constructor(){
+    // And set the root value to null for now. It's like reserving the value for later. 
+    this.root = null;
+  }
+
+  //Now let's make some functions in this class to do cool things.
+
+  findNode(data, node) {
+    //We want to start the search at the root for proper orientation. So we set the current (starting) node to the root. 
+    let currentNode = node || this.root;
+    // We then look to see if the current node is not equal to the data and if it's equal to null. If it isn't, return false. 
+    if (currentNode.data !== data) {
+      if (currentNode == null) {
+        return false;
+      }
+      //Then give 'er a looksie to see if the data is less than the current node data. If it is, set the current node and our search path to the left. 
+      else if (data < currentNode.data) {
+        currentNode = currentNode.left;
+      }
+      // If it is anything other than what was written prior, it will be right because nodes can only have two children, a right and a left-- if not the leaf. 
+      else {
+        currentNode = currentNode.right;
+      }
+      return this.findNode(data, currentNode);
+    } else {
+      return currentNode;
+    }
+  }
+
+  //let's create insert a node
+
+  insert(value) {
+    var node = this.root;
+    if (node == null) {
+      this.root = new Node(value);
+    } else {
+      var search = function (node) {
+        if (value < node.data) {
+          if (node.left == null) {
+            node.left = new Node(value);
+          } else {
+            return search(node.left);
+          }
+        } else {
+          if (node.right == null) {
+            node.right = new Node(value);
+          } else {
+            return search(node.right);
+          }
+        } 
+    
+    };
+    return search(node);
+  }
+}
+
+}
+
+  //We now have a way to add nodes to the binary search tree and search for the node values within that tree. 
+
+
+var bst = new BST();
+
+bst.insert(22);
+
+console.log(bst.findNode(22));
+
+
+
+
+2. Given a Binary Search Tree and two nodes, n1 and n2, write a function that finds the distance between the two nodes.
+
+Example: The distance between the nodes 4 and 10 is 4. The distance between the nodes 8 and 10 is 1. The distance between the nodes 1 and 14 is 4.
+
+- Explanation: 
+
+  To find the distance between the two given nodes, we need to find both of their lowest common ancestors, then check the distance
+  between the two. 
+
+
+- Code: 
+
+
+ 
+class Node{
+  constructor(data, left = null, right = null){
+    this.data = data;
+    this.left = left;
+    this.right = right;
+  }
+
+  createNode(value) {
+    if (value <= this.data) {
+      if (this.left == null) {
+        this.left = new Node(value);
+      }
+      else {
+        if (this.right == null) {
+          this.right = new Node(value);
+        }
+      }
+    }
+  }
+}
+
+class BST{
+  constructor(){
+    this.root = null;
+  }
+
+  findNode(data, node) {
+    let currentNode = node || this.root;
+    if (currentNode.data !== data) {
+      if (currentNode == null) {
+        return false;
+      }
+      else if (data < currentNode.data) {
+        currentNode = currentNode.left;
+      }
+      else {
+        currentNode = currentNode.right;
+      }
+      return this.findNode(data, currentNode);
+    } else {
+      return currentNode;
+    }
+  }
+
+  insert(value) {
+    var node = this.root;
+    if (node == null) {
+      this.root = new Node(value);
+    } else {
+      var search = function (node) {
+        if (value < node.data) {
+          if (node.left == null) {
+            node.left = new Node(value);
+          } else {
+            return search(node.left);
+          }
+        } else {
+          if (node.right == null) {
+            node.right = new Node(value);
+          } else {
+            return search(node.right);
+          }
+        } 
+    
+    };
+    return search(node);
+  }
+}
+
+  findDistance(node1, node2) {
+    const desiredValues = [node1, node2].sort();
+    let desiredValue;
+    let currentNode = this.root;
+    let distance = null;
+    while (true) {
+      if (desiredValues.includes(currentNode.data) && distance === null) {
+        distance = 0;
+        desiredValue =
+          desiredValues.indexOf(currentNode.data) === 0
+            ? desiredValues[1]
+            : desiredValues[0];
+      }
+      if (currentNode.data == desiredValue) {
+        return distance;
+      }
+      let lookingFor = desiredValue ? desiredValue : desiredValues[0];
+      currentNode =
+        currentNode.data > lookingFor ? currentNode.left : currentNode.right;
+      if (distance !== null) {
+        distance++;
+      }
+      if (!currentNode) {
+        return false;
+      }
+    }
+  }
+}
+
+
+
+
+var bst = new BST();
+
+bst.insert(22);
+bst.insert(10);
+bst.insert(4);
+bst.insert(77);
+bst.insert(5);
+bst.instert(7);
+
+//console.log(bst);
+console.log(bst.findDistance(4,10));
+//console.log(bst.findNode(22));
+
