@@ -99,20 +99,16 @@ class BST{
   //Now let's make some functions in this class to do cool things.
 
   findNode(data, node) {
-    //We want to start the search at the root for proper orientation. So we set the current (starting) node to the root. 
     let currentNode = node || this.root;
-    // We then look to see if the current node is not equal to the data and if it's equal to null. If it isn't, return false. 
+
     if (currentNode.data !== data) {
-      if (currentNode == null) {
-        return false;
-      }
-      //Then give 'er a looksie to see if the data is less than the current node data. If it is, set the current node and our search path to the left. 
-      else if (data < currentNode.data) {
+      if (data < currentNode.data) {
         currentNode = currentNode.left;
-      }
-      // If it is anything other than what was written prior, it will be right because nodes can only have two children, a right and a left-- if not the leaf. 
-      else {
+      } else {
         currentNode = currentNode.right;
+      }
+      if (!currentNode) {
+        return false;
       }
       return this.findNode(data, currentNode);
     } else {
@@ -201,17 +197,17 @@ class BST{
     this.root = null;
   }
 
-  findNode(data, node) {
+ findNode(data, node) {
     let currentNode = node || this.root;
+
     if (currentNode.data !== data) {
-      if (currentNode == null) {
-        return false;
-      }
-      else if (data < currentNode.data) {
+      if (data < currentNode.data) {
         currentNode = currentNode.left;
-      }
-      else {
+      } else {
         currentNode = currentNode.right;
+      }
+      if (!currentNode) {
+        return false;
       }
       return this.findNode(data, currentNode);
     } else {
